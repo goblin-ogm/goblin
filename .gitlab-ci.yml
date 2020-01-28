@@ -5,12 +5,13 @@ cache:
   - vendor
 
 test:
+  services:
+    - name: janusgraph/janusgraph:latest
+      alias: gremlin-server
+  image: goblinogm/goblin-buildchain
   script:
   - pip install -U -r requirements.txt
-  - cd docs
-  - make html
-  except:
-    - master
+  - python setup.py test
 
 pages:
   script:

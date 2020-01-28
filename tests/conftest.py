@@ -20,7 +20,7 @@ def pytest_addoption(parser):
             'tinkergraph',
             'dse',
         ))
-    parser.addoption('--gremlin-host', default='localhost')
+    parser.addoption('--gremlin-host', default='gremlin-server')
     parser.addoption('--gremlin-port', default='8182')
 
 
@@ -52,11 +52,9 @@ class Person(element.Vertex):
 
 class Place(element.Vertex):
     name = properties.Property(properties.String)
-    zipcode = properties.Property(
-        properties.Integer, db_name_factory=db_name_factory)
+    zipcode = properties.Property(properties.Integer, db_name_factory=db_name_factory)
     historical_name = HistoricalName(properties.String, card=Cardinality.list_)
-    important_numbers = element.VertexProperty(
-        properties.Integer, card=Cardinality.set_)
+    important_numbers = element.VertexProperty(properties.Integer, card=Cardinality.set_)
     incorporated = element.VertexProperty(properties.Boolean, default=False)
 
 

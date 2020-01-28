@@ -29,8 +29,7 @@ async def test_submit_traversal(remote_graph, remote_connection):
     await remote_connection.close()
 
 
-@pytest.mark.skipif(
-    pytest.config.getoption('provider') == 'dse', reason="need custom alias")
+#@pytest.mark.skipif(pytest.config.getoption('provider') == 'dse', reason="need custom alias")
 @pytest.mark.asyncio
 async def test_side_effects(remote_graph, remote_connection):
     async with remote_connection:
