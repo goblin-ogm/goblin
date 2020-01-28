@@ -22,3 +22,16 @@ So, we decided to rewrite Goblin from scratch...
 - *Asynchronous Python driver* for the Gremlin Server - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
 
 - Async `Graph` implementation that produces *native Python GLV traversals* - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
+
+## Developers
+
+### Testing
+
+In order to perform tests identical in nature to the integration tests we run then simply ensure you gave gitlab-runner installed then run the following command.
+
+```bash
+gitlab-runner exec docker test
+```
+
+Keep in mind this will run the tests on your local copy of the master branch so any changes not committed locally will be missed when testing.
+
