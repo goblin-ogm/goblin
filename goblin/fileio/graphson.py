@@ -2,9 +2,9 @@ import collections
 try:
     import ujson as json
 except ImportError:
-    import json
+    import json  # type: ignore
 
-from gremlin_python.structure.io import graphson
+from gremlin_python.structure.io import graphson # type: ignore
 from goblin.element import Vertex, Edge, VertexProperty
 from goblin.manager import ListVertexPropertyManager
 

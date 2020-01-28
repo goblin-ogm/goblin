@@ -1,6 +1,8 @@
+from typing import Dict, Any
+
 class Provider:
     """Superclass for provider plugins"""
-    DEFAULT_OP_ARGS = {}
+    DEFAULT_OP_ARGS: Dict[Any, Any] = {}
 
     @classmethod
     def get_default_op_args(cls, processor):

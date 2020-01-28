@@ -1,10 +1,10 @@
-"""Goblin application class and class constructor"""
+"""goblin application class and class constructor"""
 
 import collections
 import importlib
 import logging
 
-import aiogremlin
+import aiogremlin # type: ignore
 
 from goblin import element, provider, session
 
