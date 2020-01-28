@@ -1,4 +1,4 @@
-image: goblinogm/sphinx-builder
+image: goblinogm/goblin-buildchain
 
 cache:
   paths:
