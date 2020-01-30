@@ -1,70 +1,62 @@
 """Python toolkit for Tinker Pop 3 Gremlin Server."""
 
 import os
-
 from setuptools import find_packages, setup
 
-tests_require = [
-    'check-manifest>=0.25',
-    'coverage>=4.0',
-    'isort>=4.2.2',
-    'pydocstyle>=1.0.0',
-    'pytest-asyncio>=0.8.0',
-    'pytest-cache>=1.0',
-    'pytest-cov>=2.5.1',
-    'pytest-pep8>=1.0.6',
-    'pytest-timeout>=1.3.4',
-    'pytest>=3.2.1',
-    'uvloop>=0.8.1',
-]
 
-extras_require = {
-    'docs': [
-        'Sphinx>=1.6.3',
-        'alabaster>=0.7.10',
-    ],
-    'tests': tests_require,
-}
-
-extras_require['all'] = []
-for name, reqs in extras_require.items():
-    extras_require['all'].extend(reqs)
-
-setup_requires = [
-    'pytest-runner>=2.6.2',
-]
-
-install_requires = [
-    'aiogremlin>=3.3.2',
-    'inflection>=0.3.1',
-]
-
-packages = find_packages()
-
-# Get the version string. Cannot be done with import!
-g = {}
-with open(os.path.join('goblin', 'version.py'), 'rt') as fp:
-    exec(fp.read(), g)
-    version = g['__version__']
+__author__ = 'Jeffrey Phillips Freeman'
+__email__ = 'Jeffrey.Freeman@CleverThis.com'
+__license__ = 'Apache License, Version 2.0'
+__copyright__ = 'Copyright 2017, CleverThis, Inc. and contributors'
+__credits__ = ['David M. Brown - Project founder']
 
 setup(
     name='goblin',
-    version=version,
-    url='https://github.com/davebshow/goblin',
-    license='Apache License 2.0',
-    author='davebshow',
-    author_email='davebshow@gmail.com',
-    description=__doc__,
-    packages=packages,
-    install_requires=install_requires,
-    extras_require=extras_require,
-    test_suite='tests',
-    setup_requires=setup_requires,
-    tests_require=tests_require,
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: Apache License, Version 2.0',
-        'Operating System :: OS Independent',
+    version='2.2.0',
+    license=__license__,
+    author=__author__,
+    author_email=__email__,
+    description='Goblin OGM for the Tinkerpop 3 Stack,',
+    long_description='This project is officially hosted on QOTO GitLab here: https://git.qoto.org/goblin-ogm/goblin',
+    url='https://git.qoto.org/goblin-ogm/goblin',
+    download_url='https://github.com/goblin-ogm/goblin/archive/v2.2.0.tar.gz',
+    include_package_data=True,
+    keywords=['Tinkerpop', 'Tinkerpop3', 'gremlin', 'gremlin-python', 'asyncio', 'graphdb', 'ogm', 'orm'],
+    packages=find_packages(),
+    install_requires=[
+        'aiogremlin>=3.3.2',
     ],
+    test_suite='tests',
+    setup_requires = [
+        'pytest-runner>=2.6.2',
+    ]
+    tests_require=['coverage',
+                   'check-manifest>=0.25',
+                   'isort>=4.2.2',
+                   'pydocstyle>=1.0.0',
+                   'pytest-asyncio>=0.8.0',
+                   'pytest-cache>=1.0',
+                   'pytest-cov>=2.5.1',
+                   'pytest-pep8>=1.0.6',
+                   'pytest-timeout>=1.3.4',
+                   'pytest>=3.2.1',
+                   'uvloop>=0.8.1',
+                   'mock'],
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        # uncomment if you test on these interpreters:
+        # 'Programming Language :: Python :: Implementation :: IronPython',
+        # 'Programming Language :: Python :: Implementation :: Jython',
+        # 'Programming Language :: Python :: Implementation :: Stackless',
+        'Programming Language :: Python :: Implementation :: PyPy'
+    ]
 )
