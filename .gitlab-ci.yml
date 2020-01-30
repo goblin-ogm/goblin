@@ -6,7 +6,7 @@ cache:
 
 test:
   services:
-    - name: janusgraph/janusgraph:latest
+    - name: goblinogm/gremlin-server-python:latest
       alias: gremlin-server
   image: goblinogm/goblin-buildchain
   script:
