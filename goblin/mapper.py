@@ -92,7 +92,7 @@ def get_hashable_id(val):
     # Use the value "as-is" by default.
     if isinstance(val, dict) and "@type" in val and "@value" in val:
         if val["@type"] == "janusgraph:RelationIdentifier":
-            val = val["@value"]["value"]
+            val = val["@value"].get("value", val["@value"]["relationId"])
     return val
 
 
