@@ -12,7 +12,7 @@ __credits__ = ['David M. Brown - Project founder']
 
 setup(
     name='goblin',
-    version='2.2.0',
+    version='2.2.1',
     license=__license__,
     author=__author__,
     author_email=__email__,

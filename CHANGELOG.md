@@ -1,5 +1,7 @@
 # Goblin Changelog
 
+## v2.2.1
+
 ## v2.2.0
 
 * Added Immutable meta-property
