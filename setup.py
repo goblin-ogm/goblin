@@ -27,9 +27,9 @@ setup(
         'aiogremlin>=3.3.2',
     ],
     test_suite='tests',
-    setup_requires = [
+    setup_requires=[
         'pytest-runner>=2.6.2',
-    ]
+    ],
     tests_require=['coverage',
                    'check-manifest>=0.25',
                    'isort>=4.2.2',
