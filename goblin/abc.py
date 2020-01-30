@@ -1,7 +1,7 @@
 import abc
 import logging
 
-from gremlin_python.process.traversal import Cardinality
+from gremlin_python.process.traversal import Cardinality # type: ignore
 
 from goblin import element, exception, manager
 

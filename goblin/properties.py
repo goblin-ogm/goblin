@@ -1,8 +1,9 @@
 """Classes to handle properties and data type definitions"""
 
 import logging
+from typing import Any
 
-from gremlin_python.statics import long
+from gremlin_python.statics import long # type: ignore
 
 from goblin import abc, exception
 
@@ -207,12 +208,12 @@ class Float(abc.DataType):
 class Boolean(abc.DataType):
     """Simple boolean datatype"""
 
-    def validate(self, val):
+    def validate(self, val: Any):
         try:
             val = bool(val)
         except ValueError:
             raise exception.ValidationError(
-                "Not a valid boolean: {val}".format(val)) from e
+                "Not a valid boolean: {val}".format(val)) from e # type: ignore
         return val
 
     def to_db(self, val=None):

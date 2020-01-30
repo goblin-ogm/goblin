@@ -1,5 +1,6 @@
 """Helper functions and class to map between OGM Elements <-> DB Elements"""
 
+from typing import Any, Dict
 import functools
 import logging
 
@@ -87,13 +88,13 @@ def map_vertex_to_ogm(result, props, element, *, mapping=None):
     return element
 
 
-# temp hack
-def get_hashable_id(val):
-    # Use the value "as-is" by default.
+# TODO: temp hack
+def get_hashable_id(val: Dict[str, Any]) -> Any:
     if isinstance(val, dict) and "@type" in val and "@value" in val:
         if val["@type"] == "janusgraph:RelationIdentifier":
             val = val["@value"].get("value", val["@value"]["relationId"])
     return val
+
 
 
 def map_vertex_property_to_ogm(result, element, *, mapping=None):

@@ -4,17 +4,19 @@ import asyncio
 import collections
 import logging
 import weakref
+import uuid
+from typing import Callable, Awaitable, Any, Optional
 
-import aiogremlin
-from aiogremlin.driver.protocol import Message
-from aiogremlin.driver.resultset import ResultSet
-from aiogremlin.process.graph_traversal import __
-from gremlin_python.driver.remote_connection import RemoteTraversal
-from gremlin_python.process.traversal import Binding, Cardinality, Traverser
-from gremlin_python.structure.graph import Edge, Vertex
+import aiogremlin # type: ignore
+from aiogremlin.driver.protocol import Message # type: ignore
+from aiogremlin.driver.resultset import ResultSet # type: ignore
+from gremlin_python.process.graph_traversal import __, GraphTraversal # type: ignore
+from gremlin_python.driver.remote_connection import RemoteTraversal # type: ignore
+from gremlin_python.process.traversal import Binding, Cardinality, Traverser # type: ignore
+from gremlin_python.structure.graph import Edge, Vertex # type: ignore
 
 from goblin import exception, mapper
-from goblin.element import GenericEdge, GenericVertex, VertexProperty
+from goblin.element import GenericEdge, GenericVertex, VertexProperty, ImmutableMode, LockingMode
 from goblin.manager import VertexPropertyManager
 
 logger = logging.getLogger(__name__)
@@ -228,14 +230,53 @@ class Session:
         for elem in elements:
             self._pending.append(elem)
 
-    async def flush(self):
+    async def flush(
+                    self,
+                    conflicts_query: Optional[GraphTraversal] = None
+                  ) -> None:
         """
         Issue creation/update queries to database for all elements in the
         session pending queue.
         """
-        while self._pending:
-            elem = self._pending.popleft()
-            await self.save(elem)
+        transaction_id = str(uuid.uuid4())
+        processed = []
+        try:
+            while self._pending:
+                elem = self._pending.popleft()
+                actual_id = self.__dirty_element(elem, id=transaction_id)
+                if actual_id:
+                    processed.append(await self.save(elem))
+                else:
+                    await self.save(elem)
+
+            if not processed: return
+            if not conflicts_query:
+                await self.__commit_transaction(transaction_id)
+            else:
+                await (self.
+                       g.
+                       E().
+                       has('dirty', transaction_id).
+                       aggregate('x').
+                       fold().
+                       V().
+                       has('dirty', transaction_id).
+                       aggregate('x').
+                       choose(
+                           conflicts_query,
+
+                           __.
+                           select('x').
+                           unfold().
+                           properties('dirty').
+                           drop()).
+                       iterate())  # type: ignore
+                await self.__rollback_transaction(transaction_id)
+        except Exception as e:
+            await self.__rollback_transaction(transaction_id)
+            raise e
+        for elem in processed:
+            elem.dirty = None
 
     async def remove_vertex(self, vertex):
         """
@@ -347,6 +388,22 @@ class Session:
             eid = Binding('eid', edge.id)
         return await self.g.E(eid).next()
 
+    def __dirty_element(self, elem, id = str(uuid.uuid4())):
+        if elem.__locking__ and elem.__locking__ == LockingMode.OPTIMISTIC_LOCKING:
+            if not elem.dirty:
+                elem.dirty = id
+                return id
+            else:
+                return elem.dirty
+        return None
+
+    async def __commit_transaction(self, id):
+        if id: await self._g.E().has('dirty',id).aggregate('x').fold().V().has('dirty',id).aggregate('x').select('x').unfold().properties('dirty').drop().iterate()
+
+    async def __rollback_transaction(self, id):
+        print("id of: %s" % id)
+        if id: await self._g.E().has('dirty',id).aggregate('x').fold().V().has('dirty',id).aggregate('x').select('x').unfold().drop().iterate()
+
     async def _update_vertex(self, vertex):
         """
         Update a vertex, generally to change/remove property values.
@@ -388,15 +445,35 @@ class Session:
             elem = element.__mapping__.mapper_func(elem, props, element)
         return elem
 
+
+    async def __handle_create_func(self, elem, create_func):
+        transaction_id = elem.dirty
+        if not transaction_id:
+            transaction_id = self.__dirty_element(elem)
+            if transaction_id:
+                result = None
+                try:
+                    result = await create_func(elem)
+                    await self.__commit_transaction(transaction_id)
+                    result.dirty = None
+                except Exception as e:
+                    await self.__rollback_transaction(transaction_id)
+                    raise e
+                return result
+
+        return await create_func(elem)
+
+
     async def _save_element(self, elem, check_func, create_func, update_func):
         if hasattr(elem, 'id'):
             exists = await check_func(elem)
             if not exists:
-                result = await create_func(elem)
+                result = await self.__handle_create_func(elem, create_func)
             else:
+                if elem.__immutable__ and elem.__immutable__ != ImmutableMode.OFF: raise AttributeError("Trying to update an immutable element: %s" % elem)
                 result = await update_func(elem)
         else:
-            result = await create_func(elem)
+            result = await self.__handle_create_func(elem, create_func)
         return result
 
     async def _add_vertex(self, vertex):

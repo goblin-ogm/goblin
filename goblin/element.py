@@ -2,13 +2,22 @@
 
 import logging
 
-import inflection
-from gremlin_python.process.traversal import Cardinality
+import inflection # type: ignore
+from gremlin_python.process.traversal import Cardinality # type: ignore
+from enum import Enum
 
 from goblin import abc, exception, mapper, properties
+#from goblin.element import Property
 
 logger = logging.getLogger(__name__)
 
+class ImmutableMode(Enum):
+    OFF = 0
+    SIMPLE = 1
+
+class LockingMode(Enum):
+    OFF = 0
+    OPTIMISTIC_LOCKING = 1
 
 class ElementMeta(type):
     """
@@ -50,6 +59,8 @@ class ElementMeta(type):
             new_namespace[k] = v
         new_namespace['__mapping__'] = mapper.create_mapping(namespace, props)
         new_namespace['__properties__'] = props
+        new_namespace['__immutable__'] = namespace.get('__immutable__', ImmutableMode.OFF)
+        new_namespace['__locking__'] = namespace.get('__locking__', LockingMode.OFF)
         result = type.__new__(cls, name, bases, new_namespace)
         return result
 
@@ -67,6 +78,7 @@ class Element(metaclass=ElementMeta):
             setattr(self, key, value)
 
     id = properties.IdProperty(properties.Generic)
+    dirty = properties.Property(properties.String)
 
 
 class VertexPropertyDescriptor:
