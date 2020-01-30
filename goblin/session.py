@@ -439,8 +439,9 @@ class Session:
             if not metaprops:
                 metaprops = {}
             if val is not None:
-                key = ('k' + str(binding), db_name)
-                val = ('v' + str(binding), val)
+                key = db_name
+                #key = ('k' + str(binding), db_name)
+                #val = ('v' + str(binding), val)
                 if card:
                     # Maybe use a dict here as a translator
                     if card == Cardinality.list_:
