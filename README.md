@@ -24,17 +24,35 @@ The original Goblin was a TinkerPop 3 ready port of Cody Lee's mogwai, an excell
 
 So, we decided to rewrite Goblin from scratch...
 
-## Features
+Goblin is built directly on top of TinkerPop and allows access to all of the internals. This ensures all the
+TinkerPop features are available to the end-user. The TinkerPop stack provides several tools which can be used to work
+with Goblin.
+
+* **Gremlin**, a database agnostic query language for Graph Databases.
+* **Gremlin Server**, a server that provides an interface for executing Gremlin on remote machines.
+* a data-flow framework for splitting, merging, filtering, and transforming of data
+* **Graph Computer**, a framework for running algorithms against a Graph Database.
+* Support for both **OLTP** and **OLAP** engines.
+* **TinkerGraph** a Graph Database and the reference implementation for TinkerPop.
+* Native **Gephi** integration for visualizing graphs.
+* Interfaces for most major Graph Compute Engines including **Hadoop M/R**. **Spark**, and **Giraph**.
+
+Goblin also supports any of the many databases compatible with TinkerPop including the following.
+
+ * [JanusGraph](http://janusgraph.org/)
+ * [Titan](http://thinkaurelius.github.io/titan/)
+ * [Neo4j](http://neo4j.com)
+ * [OrientDB](http://www.orientechnologies.com/orientdb/)
+ * [MongoDB](http://www.mongodb.org)
+ * [Oracle NoSQL](http://www.oracle.com/us/products/database/nosql/overview/index.html)
+ * TinkerGraph
+
+ Some unique feature provided by the Goblin OGM include:
 
 * High level asynchronous *Object Graph Mapper* (OGM)
-
-* Integration with the *official gremlin-python Gremlin Language Variant* (GLV) - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
-
-* Native Python support for asynchronous programing including *coroutines*,
-  *iterators*, and *context managers* as specified in [PEP 492](https://www.python.org/dev/peps/pep-0492/)
-
+* Integration with the *official gremlin-python Gremlin Language Variant* (GLV) - now provided by [aiogremlin](http://git.qoto.org/goblin-ogm/aiogremlin)
+* Native Python support for asynchronous programing including *coroutines*, *iterators*, and *context managers* as specified in [PEP 492](https://www.python.org/dev/peps/pep-0492/)
 * *Asynchronous Python driver* for the Gremlin Server - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
-
 * Async `Graph` implementation that produces *native Python GLV traversals* - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
 
 ## Donating
