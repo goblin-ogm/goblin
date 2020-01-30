@@ -1,6 +1,6 @@
 import pytest
 from aiogremlin import process
-from gremlin_python.process.traversal import Binding
+from gremlin_python.process.traversal import Binding, T
 
 from goblin import driver
 
@@ -12,7 +12,7 @@ async def test_generate_traversal(remote_graph, remote_connection):
         traversal = g.V().hasLabel(('v1', 'person'))
         assert isinstance(traversal,
                           process.graph_traversal.AsyncGraphTraversal)
-        assert traversal.bytecode.bindings['v1'] == 'person'
+        assert traversal.bytecode.step_instructions[1][1][1] == 'person'
 
 
 @pytest.mark.asyncio
@@ -21,8 +21,8 @@ async def test_submit_traversal(remote_graph, remote_connection):
     resp = g.addV('person').property('name', 'leifur').valueMap(True)
     leif = await resp.next()
     assert leif['name'][0] == 'leifur'
-    assert leif['label'] == 'person'
-    resp = g.V(Binding('vid', leif['id'])).drop()
+    assert leif[T.label] == 'person'
+    resp = g.V(Binding('vid', leif[T.id])).drop()
     none = await resp.next()
     assert none is None
 

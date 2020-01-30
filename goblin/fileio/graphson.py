@@ -4,12 +4,12 @@ try:
 except ImportError:
     import json  # type: ignore
 
-from gremlin_python.structure.io import graphson # type: ignore
+from gremlin_python.structure.io.graphsonV3d0 import GraphSONWriter
 from goblin.element import Vertex, Edge, VertexProperty
 from goblin.manager import ListVertexPropertyManager
 
 
-writer = graphson.GraphSONWriter()
+writer = GraphSONWriter()
 
 
 AdjList = collections.namedtuple("AdjList", "vertex inE outE")

@@ -13,6 +13,7 @@ tests_require = [
     'pytest-cache>=1.0',
     'pytest-cov>=2.5.1',
     'pytest-pep8>=1.0.6',
+    'pytest-timeout>=1.3.4',
     'pytest>=3.2.1',
     'uvloop>=0.8.1',
 ]
@@ -34,8 +35,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    'aiogremlin>=3.2.6',
-    'gremlinpython>=3.2.6',
+    'aiogremlin>=3.3.2',
     'inflection>=0.3.1',
 ]
 
