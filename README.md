@@ -1,5 +1,4 @@
-# ![Goblin logo](https://git.qoto.org/goblin-ogm/goblin/uploads/bb8f7349fdb9aa2a7a244e4c95b380a7/goblin-logo.png)  Goblin OGM
-
+# [![Goblin Header](http://goblin-ogm.com/goblin-header-forlight.png)](http://goblin-ogm.com)
 
 [![tests](http://git.qoto.org/goblin-ogm/goblin/badges/master/pipeline.svg)](http://git.qoto.org/goblin-ogm/goblin/commits/master)
 [![Requirements](https://requires.io/github/goblin-ogm/goblin/requirements.svg?branch=master)](https://requires.io/github/goblin-ogm/goblin/requirements/?branch=master)
