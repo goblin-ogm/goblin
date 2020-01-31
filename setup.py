@@ -30,7 +30,7 @@ setup(
     setup_requires=[
         'pytest-runner>=2.6.2',
     ],
-    tests_require=[check-manifest>=0.25',
+    tests_require=['check-manifest>=0.25',
                    'isort>=4.2.2',
                    'pydocstyle>=1.0.0',
                    'pytest-asyncio>=0.8.0',
