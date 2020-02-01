@@ -1,5 +1,7 @@
 # Goblin Changelog
 
+## v2.2.3
+
 ## v2.2.2
 
 * updated to use aiobremlin v3.3.4 in order to get the correct dependency tree.
