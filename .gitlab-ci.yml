@@ -1,4 +1,4 @@
-image: goblinogm/goblin-buildchain
+image: goblinogm/goblin-buildchain:latest-py3.8
 
 cache:
   paths:
@@ -8,7 +8,7 @@ test:
   services:
     - name: goblinogm/gremlin-server-python:latest
       alias: gremlin-server
-  image: goblinogm/goblin-buildchain
+  image: goblinogm/goblin-buildchain:latest-py3.8
   script:
   - pip install -U codecov codacy-coverage
   - pip install -U -r requirements.txt
