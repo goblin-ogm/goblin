@@ -1,5 +1,7 @@
 # Goblin Changelog
 
+## v2.2.2
+
 ## v2.2.1
 
 * Fixed dependency requirement allowing Goblin to run on python v3.7+.
