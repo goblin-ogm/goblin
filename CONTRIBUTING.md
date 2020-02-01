@@ -82,7 +82,7 @@ ISSUES CLOSED: #31
 4. Compile source distribution with `python setup.py sdist`
 5. Compile binary distribution with `python setup.py bdist_wheel`
 6. Check the packages for errors with `twine check dist/*`
-7. Upload to Pypi using `twine upload dist/`
+7. Upload to Pypi using `twine upload dist/*`
 8. Create a tag for the current version such as `git tag -a v3.3,3 -m "version 3.3.3"`
 9. Push the tag
 10. Update the version in CHANGELOG.md and setup.py on master.
