@@ -2,6 +2,8 @@
 
 ## v2.2.3
 
+* Fixed bug when mapping an edge's properties introduced as a regression in newer gremlinpython versions.
+
 ## v2.2.2
 
 * updated to use aiobremlin v3.3.4 in order to get the correct dependency tree.

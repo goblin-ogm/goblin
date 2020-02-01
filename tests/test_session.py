@@ -112,7 +112,6 @@ class TestCreationApi:
         assert result is jon
         await app.close()
 
-    @pytest.mark.skip(reason="Test not working on all backends")
     @pytest.mark.asyncio
     async def test_get_edge(self, app, person_class, place_class,
                             lives_in_class):
@@ -187,7 +186,6 @@ class TestCreationApi:
         assert person is session1.current[rid]
         await app.close()
 
-    @pytest.mark.skip(reason="Test not working on all backends")
     @pytest.mark.asyncio
     async def test_remove_edge(self, app, person_class, place_class,
                                lives_in_class):
@@ -208,7 +206,6 @@ class TestCreationApi:
         assert not result
         await app.close()
 
-    @pytest.mark.skip(reason="Test not working on all backends")
     @pytest.mark.asyncio
     async def test_remove_edge_foreign_session(self, app, person_class,
                                                place_class, lives_in_class):
@@ -249,7 +246,6 @@ class TestCreationApi:
         assert not result.age
         await app.close()
 
-    @pytest.mark.skip(reason="Test not working on all backends")
     #@pytest.mark.skipif(pytest.config.getoption('provider') == 'dse', reason='DSE')
     @pytest.mark.asyncio
     async def test_update_edge(self, app, person_class, knows):
@@ -351,7 +347,6 @@ class TestTraversalApi:
         assert dave.__label__ == 'unregistered'
         await app.close()
 
-    @pytest.mark.skip(reason="Test not working on all backends")
     @pytest.mark.asyncio
     async def test_unregistered_edge_desialization(self, app):
         session = await app.session()
