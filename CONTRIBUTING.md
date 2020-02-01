@@ -4,6 +4,7 @@
 [![SemVer](https://img.shields.io/badge/SemVer-v2.0.0-green)](https://semver.org/spec/v2.0.0.html)
 [![Gitter](https://badges.gitter.im/goblin-ogm/goblin.svg)](https://gitter.im/goblin-ogm/goblin)
 
+
 When contributing to this repository, it is usually a good idea to first discuss the change you
 wish to make via issue, email, or any other method with the owners of this repository before
 making a change. This could potentially save a lot of wasted hours.
@@ -11,6 +12,16 @@ making a change. This could potentially save a lot of wasted hours.
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Development
+
+### Testing
+
+In order to perform tests identical in nature to the integration tests we run then simply ensure you gave gitlab-runner installed then run the following command.
+
+```bash
+gitlab-runner exec docker test
+```
+
+Keep in mind this will run the tests on your local copy of the master branch so any changes not committed locally will be missed when testing.
 
 ### Commit Message Format
 
@@ -62,3 +73,16 @@ ISSUES CLOSED: #31
    versioning scheme we use is [Semantic Versioning](http://semver.org/).
 5. Your pull request will either be approved or feedback will be given on what needs to be
    fixed to get approval. We usually review and comment on Pull Requests within 48 hours.
+
+### Deploying to Pypi
+
+1. Ensure version number in setup.py is correct. Note this is updated in both the version property and the download url.
+2. Make sure any outstanding commits are pushed.
+3. If a dist/ folder exists delete it.
+4. Compile source distribution with `python setup.py sdist`
+5. Compile binary distribution with `python setup.py bdist_wheel`
+6. Check the packages for errors with `twine check dist/*`
+7. Upload to Pypi using `twine upload dist/`
+8. Create a tag for the current version such as `git tag -a v3.3,3 -m "version 3.3.3"`
+9. Push the tag
+10. Update the version in CHANGELOG.md and setup.py on master.
