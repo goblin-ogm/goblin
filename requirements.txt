@@ -1,5 +1,5 @@
 gremlinpython>=3.4.3
-aiogremlin==3.3.3
+aiogremlin==3.3.4
 PyYAML==5.3
 six==1.14.0
 aenum==2.2.3

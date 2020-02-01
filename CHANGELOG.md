@@ -2,6 +2,8 @@
 
 ## v2.2.2
 
+* updated to use aiobremlin v3.3.4 in order to get the correct dependency tree.
+
 ## v2.2.1
 
 * Fixed dependency requirement allowing Goblin to run on python v3.7+.

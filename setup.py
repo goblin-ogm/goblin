@@ -29,7 +29,7 @@ setup(
     packages=find_packages(),
     python_requires='>=3.5',
     install_requires=[
-        'aiogremlin>=3.3.3',
+        'aiogremlin>=3.3.4',
     ],
     test_suite='tests',
     setup_requires=[
