@@ -10,6 +10,9 @@ __license__ = 'Apache License, Version 2.0'
 __copyright__ = 'Copyright 2017, CleverThis, Inc. and contributors'
 __credits__ = ['David M. Brown - Project founder']
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='goblin',
     version='2.2.1',
@@ -17,14 +20,16 @@ setup(
     author=__author__,
     author_email=__email__,
     description='Goblin OGM for the Tinkerpop 3 Stack,',
-    long_description='This project is officially hosted on QOTO GitLab here: https://git.qoto.org/goblin-ogm/goblin',
-    url='https://git.qoto.org/goblin-ogm/goblin',
-    download_url='https://github.com/goblin-ogm/goblin/archive/v2.2.0.tar.gz',
+    long_description_content_type="text/markdown",
+    long_description=long_description,
+    url='http://goblin-ogm.com',
+    download_url='https://github.com/goblin-ogm/goblin/archive/v2.2.1.tar.gz',
     include_package_data=True,
     keywords=['Tinkerpop', 'Tinkerpop3', 'gremlin', 'gremlin-python', 'asyncio', 'graphdb', 'ogm', 'orm'],
     packages=find_packages(),
+    python_requires='>=3.5',
     install_requires=[
-        'aiogremlin>=3.3.2',
+        'aiogremlin>=3.3.3',
     ],
     test_suite='tests',
     setup_requires=[

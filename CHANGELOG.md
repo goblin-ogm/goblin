@@ -2,6 +2,8 @@
 
 ## v2.2.1
 
+* Fixed dependency requirement allowing Goblin to run on python v3.7+.
+
 ## v2.2.0
 
 * Added Immutable meta-property
