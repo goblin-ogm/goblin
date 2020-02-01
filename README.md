@@ -51,8 +51,8 @@ Goblin also supports any of the many databases compatible with TinkerPop includi
 * High level asynchronous *Object Graph Mapper* (OGM)
 * Integration with the *official gremlin-python Gremlin Language Variant* (GLV) - now provided by [aiogremlin](http://git.qoto.org/goblin-ogm/aiogremlin)
 * Native Python support for asynchronous programing including *coroutines*, *iterators*, and *context managers* as specified in [PEP 492](https://www.python.org/dev/peps/pep-0492/)
-* *Asynchronous Python driver* for the Gremlin Server - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
-* Async `Graph` implementation that produces *native Python GLV traversals* - now provided by [aiogremlin](http://aiogremlin.readthedocs.io/en/latest/)
+* *Asynchronous Python driver* for the Gremlin Server - now provided by [aiogremlin](https://git.qoto.org/goblin-ogm/aiogremlin)
+* Async `Graph` implementation that produces *native Python GLV traversals* - now provided by [aiogremlin](https://git.qoto.org/goblin-ogm/aiogremlin)
 
 ## Donating
 
@@ -62,7 +62,7 @@ As an open-source project we run entierly off donations. Buy one of our hardwork
 
 ## Support and Documentation
 
-This project is officially hosted on [QOTO GitLab here](https://git.qoto.org/goblin-ogm/goblin) however an up-to-date mirror is also maintained on [Github here](https://github.com/goblin-ogm/goblin).
+The official homepage for the project is at [http://goblin-ogm.com](http://goblin-ogm.com). The source is officially hosted on [QOTO GitLab here](https://git.qoto.org/goblin-ogm/goblin) however an up-to-date mirror is also maintained on [Github here](https://github.com/goblin-ogm/goblin).
 
 Documentation: [latest](http://goblin-ogm.qoto.io/goblin)
 
@@ -79,15 +79,3 @@ This particular repository only represents the one component in a suite of libra
 * [AIO Gremlin](https://git.qoto.org/goblin-ogm/aiogremlin) - An asynchronous Gremlin DSL for gremlin-python.
 * [Goblin Buildchain](https://git.qoto.org/goblin-ogm/goblin-buildchain) - Docker image containing all the needed tools to build and test Goblin.
 * [Python Gremlin Server](https://git.qoto.org/goblin-ogm/gremlin-server-python) - Vanilla Gremlin-server with Python Script Engine loaded, used for integration testing.
-
-## Developers
-
-### Testing
-
-In order to perform tests identical in nature to the integration tests we run then simply ensure you gave gitlab-runner installed then run the following command.
-
-```bash
-gitlab-runner exec docker test
-```
-
-Keep in mind this will run the tests on your local copy of the master branch so any changes not committed locally will be missed when testing.
