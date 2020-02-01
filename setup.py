@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='goblin',
-    version='2.2.3',
+    version='2.2.4',
     license=__license__,
     author=__author__,
     author_email=__email__,
@@ -23,7 +23,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     url='http://goblin-ogm.com',
-    download_url='https://github.com/goblin-ogm/goblin/archive/v2.2.3.tar.gz',
+    download_url='https://github.com/goblin-ogm/goblin/archive/v2.2.4.tar.gz',
     include_package_data=True,
     keywords=['Tinkerpop', 'Tinkerpop3', 'gremlin', 'gremlin-python', 'asyncio', 'graphdb', 'ogm', 'orm'],
     packages=find_packages(),

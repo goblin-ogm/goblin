@@ -1,5 +1,7 @@
 # Goblin Changelog
 
+## v2.2.4
+
 ## v2.2.3
 
 * Fixed bug when mapping an edge's properties introduced as a regression in newer gremlinpython versions.
