@@ -1,6 +1,6 @@
 gremlinpython>=3.4.3
 aiogremlin==3.3.4
-PyYAML==5.3
+PyYAML==5.4
 six==1.14.0
 aenum==2.2.3
 aiohttp==3.6.2
