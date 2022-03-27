@@ -18,6 +18,7 @@ from gremlin_python.structure.graph import Edge, Vertex # type: ignore
 from goblin import exception, mapper
 from goblin.element import GenericEdge, GenericVertex, VertexProperty, ImmutableMode, LockingMode
 from goblin.manager import VertexPropertyManager
+import traceback
 
 logger = logging.getLogger(__name__)
 
@@ -158,6 +159,10 @@ class Session:
                 msg = Message(200, result, '')
                 result_set.queue_result(msg)
         except Exception as e:
+            print("Exception caught, will show up as a msg, traceback here:")
+            print(e)
+            for line in traceback.format_stack():
+                print(line.strip())
             msg = Message(500, None, e.args[0])
             result_set.queue_result(msg)
         finally:
@@ -172,12 +177,12 @@ class Session:
                 current = self.current.get(hashable_id, None)
                 if isinstance(obj, Vertex):
                     # why doesn't this come in on the vertex?
-                    label = await self._g.V(obj.id).label().next()
+                    label = await self._g.V(hashable_id).label().next()
                     if not current:
                         current = self.app.vertices.get(label, GenericVertex)()
-                    props = await self._get_vertex_properties(obj.id, label)
+                    props = await self._get_vertex_properties(hashable_id, label)
                 if isinstance(obj, Edge):
-                    props = await self._g.E(obj.id).valueMap(True).next()
+                    props = await self._g.E(hashable_id).valueMap(True).next()
                     if not current:
                         current = self.app.edges.get(
                             props.get('label'), GenericEdge)()
