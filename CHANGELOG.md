@@ -2,6 +2,8 @@
 
 ## v2.2.4
 
+* Added support for JanusGraph backend.
+
 ## v2.2.3
 
 * Fixed bug when mapping an edge's properties introduced as a regression in newer gremlinpython versions.

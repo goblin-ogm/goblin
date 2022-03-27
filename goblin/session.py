@@ -401,7 +401,6 @@ class Session:
         if id: await self._g.E().has('dirty',id).aggregate('x').fold().V().has('dirty',id).aggregate('x').select('x').unfold().properties('dirty').drop().iterate()
 
     async def __rollback_transaction(self, id):
-        print("id of: %s" % id)
         if id: await self._g.E().has('dirty',id).aggregate('x').fold().V().has('dirty',id).aggregate('x').select('x').unfold().drop().iterate()
 
     async def _update_vertex(self, vertex):
@@ -438,10 +437,11 @@ class Session:
         if elem:
             if element.__type__ == 'vertex':
                 # Look into this
-                label = await self._g.V(elem.id).label().next()
-                props = await self._get_vertex_properties(elem.id, label)
+                label = await self._g.V(self._get_hashable_id(elem.id)).label().next()
+                props = await self._get_vertex_properties(self._get_hashable_id(elem.id), label)
             elif element.__type__ == 'edge':
-                props = await self._g.E(elem.id).valueMap(True).next()
+                props = await self._g.E(self._get_hashable_id(elem.id)).valueMap(True).next()
+
             elem = element.__mapping__.mapper_func(elem, props, element)
         return elem
 

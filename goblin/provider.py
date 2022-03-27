@@ -15,3 +15,22 @@ class TinkerGraph(Provider):  # TODO
     @staticmethod
     def get_hashable_id(val):
         return val
+
+class JanusGraph(Provider):  # TODO
+    """Default provider"""
+
+    @staticmethod
+    def get_hashable_id(val):
+        if not isinstance(val, dict):
+            return val
+        type_prop = val.get("@type", None)
+        if not type_prop == "janusgraph:RelationIdentifier":
+            return val
+        val_prop = val.get("@value", None)
+        if not isinstance(val_prop, dict):
+            return val
+        rel_prop = val_prop.get("relationId", None)
+        if not rel_prop:
+            return val
+        return rel_prop
+
