@@ -61,7 +61,7 @@ class ElementMeta(ABCMeta):
         new_namespace['__properties__'] = props
         new_namespace['__immutable__'] = namespace.get('__immutable__', ImmutableMode.OFF)
         new_namespace['__locking__'] = namespace.get('__locking__', LockingMode.OFF)
-        result = type.__new__(cls, name, bases, new_namespace)
+        result = ABCMeta.__new__(cls, name, bases, new_namespace)
         return result
 
 
