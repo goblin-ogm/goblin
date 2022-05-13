@@ -70,7 +70,7 @@ For support please use [Gitter](https://gitter.im/goblin-ogm/goblin) or the [off
 
 Please file bugs and feature requests on [QOTO GitLab](https://git.qoto.org/goblin-ogm/goblin/issues) our old archived issues can still be viewed on [Github](https://github.com/davebshow/goblin/issues) as well.
 
-Aparapi conforms to the [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html) standard. That means the version of a release isnt arbitrary but rather describes how the library interfaces have changed. Read more about it at the [Semantic Versioning page](http://semver.org/spec/v2.0.0.html).
+Goblin~~~~ conforms to the [Semantic Versioning 2.0.0](http://semver.org/spec/v2.0.0.html) standard. That means the version of a release isnt arbitrary but rather describes how the library interfaces have changed. Read more about it at the [Semantic Versioning page](http://semver.org/spec/v2.0.0.html).
 
 ## Related Projects
 
