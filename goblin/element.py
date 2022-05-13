@@ -7,7 +7,7 @@ from gremlin_python.process.traversal import Cardinality # type: ignore
 from enum import Enum
 
 from goblin import abc, exception, mapper, properties
-#from goblin.element import Property
+from abc import ABCMeta
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class LockingMode(Enum):
     OFF = 0
     OPTIMISTIC_LOCKING = 1
 
-class ElementMeta(type):
+class ElementMeta(ABCMeta):
     """
     Metaclass for graph elements. Responsible for creating the
     :py:class:`Mapping<goblin.mapper.Mapping>` object and replacing user
@@ -61,7 +61,7 @@ class ElementMeta(type):
         new_namespace['__properties__'] = props
         new_namespace['__immutable__'] = namespace.get('__immutable__', ImmutableMode.OFF)
         new_namespace['__locking__'] = namespace.get('__locking__', LockingMode.OFF)
-        result = type.__new__(cls, name, bases, new_namespace)
+        result = ABCMeta.__new__(cls, name, bases, new_namespace)
         return result
 
 
